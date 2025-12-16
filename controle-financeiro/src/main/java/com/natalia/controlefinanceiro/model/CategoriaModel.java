@@ -5,12 +5,14 @@ import lombok.Data;
 
 @Data
 @Entity
-public class UsuarioModel {
-
+public class CategoriaModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID automático (1, 2...)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
-    private String email;
-    private String senha;
+
+    @Enumerated(EnumType.STRING)
+    private TipoCategoria tipo;
 }
+
