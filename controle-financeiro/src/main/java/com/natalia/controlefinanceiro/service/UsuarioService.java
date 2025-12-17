@@ -2,6 +2,7 @@ package com.natalia.controlefinanceiro.service;
 
 import com.natalia.controlefinanceiro.model.UsuarioModel;
 import com.natalia.controlefinanceiro.repository.UsuarioRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
@@ -12,7 +13,13 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public UsuarioModel salvar(UsuarioModel usuario) {
+        //Criptografia
+        String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
+        usuario.setSenha(senhaCriptografada);
         return usuarioRepository.save(usuario);
     }
 
