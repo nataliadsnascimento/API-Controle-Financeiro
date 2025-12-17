@@ -16,7 +16,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public List<UsuarioModel> listarTodos() {
+    public List<UsuarioModel> listar() {
         return usuarioRepository.findAll();
     }
 
@@ -25,7 +25,7 @@ public class UsuarioService {
                 .orElseThrow(() -> new RuntimeException("Usuário com ID " + id + " não encontrado"));
     }
 
-    public UsuarioModel atualizarUsuario(Long id, UsuarioModel detalhesUsuario) {
+    public UsuarioModel atualizar(Long id, UsuarioModel detalhesUsuario) {
         UsuarioModel usuarioExistente = buscarPorId(id);
 
         usuarioExistente.setNome(detalhesUsuario.getNome());
@@ -35,7 +35,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuarioExistente);
     }
 
-    public void deletarUsuario(Long id) {
+    public void deletar(Long id) {
         if (!usuarioRepository.existsById(id)) {
             throw new RuntimeException("Usuário não encontrado");
         }

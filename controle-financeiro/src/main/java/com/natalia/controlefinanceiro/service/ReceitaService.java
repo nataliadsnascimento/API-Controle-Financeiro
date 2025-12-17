@@ -16,7 +16,7 @@ public class ReceitaService {
         return receitaRepository.save(receitaModel);
     }
 
-    public List<ReceitaModel> listarReceitas(){
+    public List<ReceitaModel> listar(){
         return receitaRepository.findAll();
     }
 
@@ -36,7 +36,7 @@ public class ReceitaService {
         return receitaRepository.save(receita);
     }
 
-    public void deletarPorId(Long id){
+    public void deletar(Long id){
         if(receitaRepository.existsById(id)){
             receitaRepository.deleteById(id);
         }
