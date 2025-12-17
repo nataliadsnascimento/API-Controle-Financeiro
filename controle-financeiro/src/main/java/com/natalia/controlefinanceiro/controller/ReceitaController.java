@@ -15,8 +15,6 @@ import java.util.List;
 public class ReceitaController {
     @Autowired
     private ReceitaService receitaService;
-    @Autowired
-    private DespesaService despesaService;
 
     @PostMapping
     public ResponseEntity<ReceitaModel> salvar(@RequestBody ReceitaModel receitaModel){
@@ -40,10 +38,9 @@ public class ReceitaController {
         return ResponseEntity.ok(receitaService.atualizar(id, receitaModel));
     }
 
-    @DeleteMapping
-    public ResponseEntity<ReceitaModel> deletar(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(@PathVariable Long id){
         receitaService.deletar(id);
         return ResponseEntity.noContent().build();
     }
-
 }

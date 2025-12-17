@@ -36,8 +36,8 @@ public class DespesaController {
         return ResponseEntity.ok(despesaService.atualizar(id, despesa));
     }
 
-    @DeleteMapping
-    public ResponseEntity<DespesaModel> remover(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
         despesaService.deletar(id);
         return ResponseEntity.noContent().build();
     }
