@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Meus Arquivos Segredos (DevSecOps) ###
+application-dev.properties
+
+### Banco de Dados Local ###
+dados/
+*.db
