@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UsuarioService {
@@ -16,7 +17,10 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Transactional
     public UsuarioModel salvar(UsuarioModel usuario) {
+        usuario.setId(null);
+
         //Criptografia
         String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
         usuario.setSenha(senhaCriptografada);
@@ -53,7 +57,7 @@ public class UsuarioService {
         UsuarioModel usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Email não encontrado"));
 
-        if (!usuario.getSenha().equals(senhaRecebida)) {
+        if (!passwordEncoder.matches(senhaRecebida, usuario.getSenha())) {
             throw new RuntimeException("Senha incorreta");
         }
 

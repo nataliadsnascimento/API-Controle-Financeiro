@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.natalia.controlefinanceiro.service.TokenService;
 
 import java.util.List;
 
@@ -14,6 +15,16 @@ import java.util.List;
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private TokenService tokenService;
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UsuarioModel usuario) {
+        UsuarioModel usuarioAutenticado = usuarioService.autenticar(usuario.getEmail(), usuario.getSenha());
+        String token = tokenService.gerarToken(usuarioAutenticado);
+        return ResponseEntity.ok(token);
+    }
 
     @PostMapping
     public ResponseEntity<UsuarioModel> salvar(@RequestBody UsuarioModel usuario){
