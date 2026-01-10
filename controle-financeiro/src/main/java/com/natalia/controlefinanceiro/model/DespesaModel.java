@@ -24,4 +24,11 @@ public class DespesaModel {
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private UsuarioModel usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "conta_id")
+    private ContaModel conta;
+
+    @Enumerated(EnumType.STRING)
+    private FormaPagamento formaPagamento;
 }
